@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import getRandomColor from "./Components/getRandomColor";
-import Gameplay from "./Components/gameplay";
+import Gameplay from "./Components/Gameplay";
 function App() {
   const [isClicked, setIsClicked] = useState(false);
   const bgColor = getRandomColor();
