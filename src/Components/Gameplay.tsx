@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+import Start from "./Start";
+import NotStart from "./NotStart";
+import Starting from "./Starting";
 const Gameplay = () => {
   const [players, setPlayers] = useState([]);
   const [playerName, setPlayerName] = useState("");
@@ -57,7 +59,8 @@ const Gameplay = () => {
           ))}
         </ul>
       </div>
-      {setPlayers === 4 ? "Start" : ""}
+      {players.length >= 3 ? (<Start/>) : (<NotStart/>)}
+     
     </>
   );
 };
