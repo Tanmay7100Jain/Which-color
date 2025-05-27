@@ -1,4 +1,4 @@
-
+import React from "react";
 const getRandomColor = function (): string {
   const val1 = Math.floor(Math.random() * 256);
   const val2 = Math.floor(Math.random() * 256);

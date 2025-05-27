@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import getRandomColor from "./Components/getRandomColor";
+import { BrowserRouter as Router , Route , Routes } from "react-router-dom";
 import Gameplay from "./Components/Gameplay";
 import Starting from "./Components/Starting";
-import Start from "./Components/Start";
+
 function App() {
   const [isClicked, setIsClicked] = useState(false);
   const bgColor = getRandomColor();
@@ -12,8 +13,13 @@ function App() {
   };
   
   return (
+    <Router>
     <div style={{ backgroundColor: bgColor, minHeight: "100vh" }}>
-      {!isClicked ? (
+      <Routes>
+        <Route
+        path="/"
+        element={
+      !isClicked ? (
         <div className="flex justify-center items-center">
           <img
             onClick={handle}
@@ -22,11 +28,16 @@ function App() {
             src="img3.png"
             alt="logo"
             />
-        </div>
+        </div> 
       ) : (
         <Gameplay />
-      )}
+      )
+    }
+      />
+      <Route path="/starting"  element={<Starting/>}/>
+      </Routes>
     </div>
+    </Router>
   );
 }
 
