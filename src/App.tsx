@@ -1,43 +1,48 @@
+// App.tsx
 import React, { useState } from "react";
 import getRandomColor from "./Components/getRandomColor";
-import { BrowserRouter as Router , Route , Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Gameplay from "./Components/Gameplay";
 import Starting from "./Components/Starting";
-
+import { PlayerContext } from "./Components/PlayerContext";
 function App() {
   const [isClicked, setIsClicked] = useState(false);
+  const [players, setPlayers] = useState<string[]>([]);
   const bgColor = getRandomColor();
 
   const handle = () => {
     setIsClicked(true);
   };
-  
+
   return (
-    <Router>
-    <div style={{ backgroundColor: bgColor, minHeight: "100vh" }}>
-      <Routes>
-        <Route
-        path="/"
-        element={
-      !isClicked ? (
-        <div className="flex justify-center items-center">
-          <img
-            onClick={handle}
-            style={{ background: bgColor }}
-            className="h-80 w-80 mt-32 bg-black cursor-pointer"
-            src="img3.png"
-            alt="logo"
+    <PlayerContext.Provider value={{ players, setPlayers }}>
+      <Router>
+        <div style={{ backgroundColor: bgColor, minHeight: "100vh" }}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                !isClicked ? (
+                  <div className="flex justify-center items-center">
+                    <img
+                      onClick={handle}
+                      style={{ background: bgColor }}
+                      className="h-80 w-80 mt-32 text-center bg-black cursor-pointer"
+                      src="img3.png"
+                      alt="logo"
+                    />
+                  </div>
+                ) : (
+                  <Gameplay />
+                )
+              }
             />
-        </div> 
-      ) : (
-        <Gameplay />
-      )
-    }
-      />
-      <Route path="/starting"  element={<Starting/>}/>
-      </Routes>
-    </div>
-    </Router>
+            <Route path="/starting" element={<Starting />} />
+            <Route path="/Gameplay" element={<Gameplay />} />
+          </Routes>
+        </div>
+      </Router>
+    </PlayerContext.Provider>
   );
 }
 
