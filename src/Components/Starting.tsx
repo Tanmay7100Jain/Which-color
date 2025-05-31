@@ -49,7 +49,7 @@ const Starting = () => {
   }, [isSpinning, players, angleStep]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-white bg-gray-900">
+    <div className="flex flex-col items-center justify-center min-h-screen text-white ">
       <button
         onClick={() => navigate(-1)}
         className="bg-white text-black text-lg md:text-xl px-4 py-2 rounded hover:bg-gray-200 absolute top-4 left-4"
@@ -67,7 +67,7 @@ const Starting = () => {
 
       <div className="relative w-[90vw] max-w-[400px] aspect-square rounded-full border-4 border-black overflow-hidden mt-24 sm:mt-20">
         <div className="w-full h-full">
-          {players.map((name, index) => {
+          {players.map((key, index) => {
             const segmentRotation = index * angleStep;
             const bgColor = colors[index];
             const textColor = isColorDark(bgColor) ? "#fff" : "#000";
@@ -90,7 +90,6 @@ const Starting = () => {
                     userSelect: "none",
                   }}
                 >
-                  
                 </div>
               </div>
             );
