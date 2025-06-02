@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Questions from "./Questions";
 
 const Started = () => {
   const location = useLocation();
@@ -19,11 +20,16 @@ const Started = () => {
       </div>
     );
   }
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white">
-      <h1 className="text-4xl sm:text-6xl font-bold mb-6"> 
+    <div className="flex flex-col items-center justify-center min-h-screen text-white">
+      <h1 className="text-4xl sm:text-6xl font-bold mb-6">
+        🎉 {winner} Turn🎉
       </h1>
+      <div>
+        <Questions/>
+
+        <input type="text" />
+      </div>
       <button
         onClick={() => navigate("/Starting")}
         className="px-6 py-2 bg-white text-black rounded hover:bg-gray-200 text-lg"
