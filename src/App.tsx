@@ -1,10 +1,11 @@
-// App.tsx
 import React, { useState } from "react";
 import getRandomColor from "./Components/getRandomColor";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Gameplay from "./Components/Gameplay";
 import Starting from "./Components/Starting";
+import Started from "./Components/Started"; 
 import { PlayerContext } from "./Components/PlayerContext";
+
 function App() {
   const [isClicked, setIsClicked] = useState(false);
   const [players, setPlayers] = useState<string[]>([]);
@@ -38,7 +39,8 @@ function App() {
               }
             />
             <Route path="/starting" element={<Starting />} />
-            <Route path="/Gameplay" element={<Gameplay />} />
+            <Route path="/gameplay" element={<Gameplay />} />
+            <Route path="/winner" element={<Started />} /> 
           </Routes>
         </div>
       </Router>
