@@ -6,4 +6,4 @@ const NotStart = () => {
   )
 }
 
-export default NotStart
+export default NotStart;
