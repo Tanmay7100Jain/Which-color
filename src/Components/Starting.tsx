@@ -51,7 +51,7 @@ const Starting = () => {
         ← Back
       </button>
 
-      <div className="mb-6 px-4 py-2 max-w-md mx-auto bg-white/20 rounded-lg text-white text-center font-semibold tracking-wide shadow-md select-none break-words">
+      <div className="mb-6 px-4 mt-16 py-2 max-w-md mx-auto bg-white/20 rounded-lg text-white text-center font-semibold tracking-wide shadow-md select-none break-words">
         Players: {players.length > 0 ? players.join(", ") : "No players found"}
       </div>
 

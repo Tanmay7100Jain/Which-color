@@ -26,7 +26,7 @@ const Started = () => {
         🎉 {winner} Turn🎉
       </h1>
       <div>
-        <Questions/>
+        <Questions  />
 
         <input type="text" />
       </div>
