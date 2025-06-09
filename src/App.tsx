@@ -11,9 +11,10 @@ function App() {
   const [players, setPlayers] = useState<string[]>([]);
   const bgColor = getRandomColor();
 
-  const handle = () => {
+  
+  setTimeout(() => {
     setIsClicked(true);
-  };
+  }, 3000);
 
   return (
     <PlayerContext.Provider value={{ players, setPlayers }}>
@@ -25,14 +26,14 @@ function App() {
               element={
                 !isClicked ? (
                   <div className="flex justify-center items-center">
-                    <img
-                      onClick={handle}
-                      style={{ background: bgColor }}
-                      className="h-80 w-80 mt-32 text-center bg-black cursor-pointer"
-                      src="img3.png"
-                      alt="logo"
-                    />
-                  </div>
+                  <img
+                    style={{ background: bgColor }}
+                    className="h-80 w-80 mt-32 text-center bg-black cursor-pointer"
+                    src="img3.png"
+                    alt="logo"
+                  />
+                </div>
+                
                 ) : (
                   <Gameplay />
                 )
