@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { answers } from "../constants/Answers";
 import { questions, colorKeys } from "../constants/Question.constant";
+import { Ask } from "./Ask";
+import { useNavigate } from "react-router-dom";
 
 const Questions: React.FC = () => {
   const [randomIndex] = useState<number>(
@@ -9,18 +11,21 @@ const Questions: React.FC = () => {
   const [userInput, setUserInput] = useState<string>("");
   const [feedback, setFeedback] = useState<string>("");
   const [showInput, setShowInput] = useState(true);
-  const [secondsLeft, setSecondsLeft] = useState(20);
-  const [resultStatus, setResultStatus] = useState<string>(""); 
+  const [secondsLeft, setSecondsLeft] = useState(5);
+  const [resultStatus, setResultStatus] = useState<string>("");
+
+  const navigate = useNavigate();
+
   const question = questions[randomIndex];
   const colorMatch = question.match(/Name something that is (.+) in color\./i);
   const color: string = colorMatch ? colorMatch[1].toLowerCase() : "";
   const key: string = colorKeys[color] || color;
   const validAnswers: string[] = answers[key] || [];
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
-  
+
   const checkAnswer = () => {
     const isCorrect = validAnswers.some(
       (ans) => ans.toLowerCase() === userInput.trim().toLowerCase()
@@ -60,8 +65,16 @@ const Questions: React.FC = () => {
   }, [resultStatus]);
 
 
+  useEffect(() => {
+    if (resultStatus === "timeout") {
+      const timeout = setTimeout(() => {
+        navigate("/result");
+      }, 1000); 
+      return () => clearTimeout(timeout);
+    }
+  }, [resultStatus, navigate]);
+
   return (
-    <>
     <div className="text-center mb-6">
       <p className="text-2xl mb-8">{question}</p>
 
@@ -90,16 +103,17 @@ const Questions: React.FC = () => {
         <p className="text-white text-center text-3xl font-semibold">
           ⏰ Time's up!
         </p>
-      )}{showInput &&
-      <div className="text-white mt-2 text-lg">
-        ⏳ Time left: {secondsLeft}s
-      </div>}
+      )}
+
+      {showInput && (
+        <div className="text-white mt-2 text-lg">
+          ⏳ Time left: {secondsLeft}s
+        </div>
+      )}
 
       {feedback && <p className="mt-3 font-semibold">{feedback}</p>}
     </div>
     
-  
- </>
   );
 };
 
