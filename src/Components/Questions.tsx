@@ -11,7 +11,7 @@ const Questions: React.FC = () => {
   const [userInput, setUserInput] = useState<string>("");
   const [feedback, setFeedback] = useState<string>("");
   const [showInput, setShowInput] = useState(true);
-  const [secondsLeft, setSecondsLeft] = useState(5);
+  const [secondsLeft, setSecondsLeft] = useState(25);
   const [resultStatus, setResultStatus] = useState<string>("");
 
   const navigate = useNavigate();
@@ -64,12 +64,11 @@ const Questions: React.FC = () => {
     return () => clearInterval(countdown);
   }, [resultStatus]);
 
-
   useEffect(() => {
     if (resultStatus === "timeout") {
       const timeout = setTimeout(() => {
         navigate("/result");
-      }, 1000); 
+      }, 1000);
       return () => clearTimeout(timeout);
     }
   }, [resultStatus, navigate]);
@@ -78,12 +77,24 @@ const Questions: React.FC = () => {
     <div className="text-center mb-6">
       <p className="text-2xl mb-8">{question}</p>
 
+      {showInput && (
+        <div className="mb-4 text-white">
+          <p>
+            Rule: Your answer must start with "
+            <span className="font-bold">{color}</span>"
+          </p>
+          <p>
+            Example: "<span className="font-bold">{color} apple</span>"
+          </p>
+        </div>
+      )}
+
       {showInput ? (
         <>
           <input
             type="text"
             className="px-3 py-2 rounded bg-white text-black"
-            placeholder="Your answer"
+            placeholder={`${color} ...`}
             value={userInput}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
@@ -113,7 +124,6 @@ const Questions: React.FC = () => {
 
       {feedback && <p className="mt-3 font-semibold">{feedback}</p>}
     </div>
-    
   );
 };
 
