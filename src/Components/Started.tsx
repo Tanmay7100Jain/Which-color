@@ -28,7 +28,6 @@ const Started = () => {
       <div>
         <Questions  />
 
-        <input type="text" />
       </div>
       <button
         onClick={() => navigate("/Starting")}
